@@ -1,4 +1,4 @@
-# Metodos-Numericos-2025-1-Samuel-Gil-Juan-Alvarez-
+# Metodos-Numericos-2025-2-Samuel-Gil-Juan-Alvarez-
 # Mini-Proyectos: Métodos Numéricos para la Solución de EDPs
 
 Este repositorio contiene una colección de mini-proyectos desarrollados en el marco del curso de **Métodos Numéricos para la Solución de Ecuaciones Diferenciales Parciales (EDPs)**. El objetivo principal es explorar y aplicar de forma práctica diferentes técnicas numéricas para aproximar soluciones a problemas de ingeniería y física.
