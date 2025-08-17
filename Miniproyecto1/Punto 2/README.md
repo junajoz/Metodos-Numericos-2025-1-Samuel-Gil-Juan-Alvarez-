@@ -1,4 +1,4 @@
-# Mini-Proyecto 2: Estabilidad y Orden de Métodos Numéricos
+# Punto 2: Estabilidad y Orden de Métodos Numéricos
 
 Este proyecto se centra en la aplicación de diferentes esquemas de diferencias finitas para resolver un problema de decaimiento exponencial. El objetivo principal es realizar experimentos virtuales para analizar y verificar las propiedades de estabilidad y el orden de convergencia de cada método.
 
