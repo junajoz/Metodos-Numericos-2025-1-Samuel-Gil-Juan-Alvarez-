@@ -36,7 +36,7 @@ for method in methods:  # Ciclo sobre los diferentes métodos
             elif method == 'Backward Euler':
                 u[n+1] = (1 / (1 + a*dt)) * u[n]
 
-        # Store the solutions for later
+        # Guardar soluciones para más adelante
         solutions[m][i] = u
         if i <= 3:
             ax[0].plot(t, u, marker='o', label=f'Δt = {dt}')
