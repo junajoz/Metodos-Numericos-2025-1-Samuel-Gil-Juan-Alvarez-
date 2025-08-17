@@ -1,75 +1,79 @@
 # Punto 2: Estabilidad y Orden de Métodos Numéricos
 
-Este proyecto se centra en la aplicación de diferentes esquemas de diferencias finitas para resolver un problema de decaimiento exponencial. El objetivo principal es realizar experimentos virtuales para analizar y verificar las propiedades de estabilidad y el orden de convergencia de cada método.
-
----
+Este proyecto aplica distintos esquemas de diferencias finitas para resolver la ecuación de decaimiento exponencial. El propósito es comprobar en la práctica la estabilidad de cada método y estimar su orden de convergencia a partir del análisis del error.
 
 ---
 
 ### Métodos Numéricos Analizados
 
-Para este estudio, se implementan y analizan tres esquemas de solución numérica:
+Se trabajó con tres esquemas de integración temporal:
 
-1.  **Método de Euler Explícito (Forward Euler)**: Este es un esquema condicionalmente estable, que requiere que el paso de tiempo ($\Delta t$) cumpla la condición $\Delta t < 2/a$ para evitar soluciones crecientes y $\Delta t < 1/a$ para evitar soluciones oscilatorias.
-2.  **Método de Crank-Nicolson**: Este es un esquema incondicionalmente estable con respecto a soluciones crecientes. Sin embargo, es condicionalmente estable con el criterio $\Delta t < 2/a$ para evitar soluciones oscilatorias.
-3.  **Método de Euler Implícito (Backward Euler)**: Este esquema es incondicionalmente estable para ambas, soluciones crecientes y oscilatorias, lo que significa que "cualquier $\Delta t$ funcionará".
+1. **Euler Explícito (Forward Euler):** Método condicionalmente estable. Requiere que el paso de tiempo cumpla \(\Delta t < 2/a\) para evitar crecimiento no físico y \(\Delta t < 1/a\) para que no aparezcan oscilaciones.
+2. **Crank-Nicolson:** Es incondicionalmente estable respecto a crecimiento, pero puede presentar oscilaciones si \(\Delta t > 2/a\).
+3. **Euler Implícito (Backward Euler):** Es incondicionalmente estable tanto frente a crecimiento como a oscilaciones.
 
 ---
 
 ### Objetivos del Experimento
 
-El experimento virtual se diseñó para:
-
-* **Verificar** las tres afirmaciones sobre la estabilidad de los métodos de Forward Euler, Crank-Nicolson y Backward Euler.
-* **Encontrar** las zonas de linealidad entre el logaritmo del error y el logaritmo del paso de tiempo. Esta relación es crucial para determinar el orden de aproximación del método.
-* **Estimar** la pendiente de esta relación lineal para cada uno de los tres esquemas.
-* **Discutir** el valor de estas pendientes y cómo se relacionan con el orden teórico de aproximación de cada método.
-
-### Cálculo del Error Numérico
-
-Para la estimación del error se utiliza la norma dada por la ecuación 1.57. Este valor único expresa el tamaño del error numérico para cada simulación, denominado $E$:
-
-$$E = \sqrt{\Delta t \sum_{n=0}^{N_t} (e^n)^2}$$
-
-donde $e^n$ es el error en el paso de tiempo $n$, y $N_t$ es el número total de pasos.
+- Verificar de manera práctica la estabilidad de los tres métodos.  
+- Encontrar la relación entre \(\log(E)\) y \(\log(\Delta t)\) para estimar el orden de convergencia.  
+- Comparar los resultados con los órdenes teóricos.  
 
 ---
 
-### Resultados Gráficos y Discusión
+### Cálculo del Error
 
-A continuación, se presentan los resultados gráficos obtenidos para cada uno de los métodos. Las imágenes deben ser almacenadas en la carpeta `docs` con los nombres especificados.
+El error global de cada simulación se midió con la norma:
 
-#### **1. Método de Euler Explícito (Forward Euler)**
+\[
+E = \sqrt{\Delta t \sum_{n=0}^{N_t} (e^n)^2}
+\]
 
-La gráfica de estabilidad muestra cómo la solución explícita diverge y se vuelve inestable cuando el paso de tiempo ($\Delta t$) supera el valor crítico. La gráfica de análisis de error a la derecha, muestra una clara relación lineal en escala logarítmica para pasos de tiempo pequeños, cuya pendiente corresponde al orden del método.
+donde \(e^n\) es el error puntual en el tiempo \(t_n\).  
 
+---
+
+### Resultados, Gráficos y Discusión
+
+Las simulaciones se realizaron con \(\Delta t = [1.25, 0.625, 0.3125, 0.15625, 0.078125, 0.0390625]\), usando \(a=2\).  
+
+#### **1. Forward Euler**
+Para \(\Delta t = 1.25\) el método diverge, confirmando que no cumple la condición de estabilidad, mientras que para \(\Delta t = 0.625\) la respuesta es oscilatoria, pero decreciento. Con pasos más pequeños, la solución se mantiene estable y el análisis log–log del error muestra una zona lineal con pendiente cercana a 1.  
 ![Forward Euler - Estabilidad y Orden](docs/forward_euler_plots.png)
 
-#### **2. Método de Crank-Nicolson**
-
-El gráfico de estabilidad del método de Crank-Nicolson muestra que, a pesar de las oscilaciones para un $\Delta t$ grande, la solución se mantiene acotada, lo que confirma su estabilidad incondicional frente a soluciones crecientes. El análisis de error muestra una relación lineal con una pendiente que se espera que sea cercana a 2, lo que valida su orden de aproximación.
-
+#### **2. Crank-Nicolson**
+Se mantuvo estable incluso con \(\Delta t = 1.25\), aunque en ese caso aparecieron oscilaciones. Para pasos menores, el error decrece con pendiente cercana a 2 en la gráfica log–log, como se espera para un método de segundo orden.  
 ![Crank-Nicolson - Estabilidad y Orden](docs/crank_nicolson_plots.png)
 
-#### **3. Método de Euler Implícito (Backward Euler)**
-
-Este método demuestra ser incondicionalmente estable, manteniendo su solución sin oscilaciones ni divergencia incluso para un $\Delta t$ grande. La gráfica de análisis de error también presenta una relación lineal, con una pendiente que debería confirmar su naturaleza de primer orden, similar a la del método de Forward Euler.
-
+#### **3. Backward Euler**
+El esquema implícito fue estable en todos los casos, sin oscilaciones ni divergencias. El error se redujo de forma lineal en escala log–log, con pendiente cercana a 1.  
 ![Backward Euler - Estabilidad y Orden](docs/backward_euler_plots.png)
 
-Se espera que la relación entre el logaritmo del error y el logaritmo del paso de tiempo sea lineal. La pendiente de esta línea recta representa el orden de precisión del método. Para los métodos de **Forward y Backward Euler**, se prevé que la pendiente sea cercana a 1, confirmando su naturaleza de primer orden. Para el método de **Crank-Nicolson**, la pendiente esperada es cercana a 2, lo que demuestra su aproximación de segundo orden.
+---
+
+### Conclusiones
+
+Los valores estimados de pendiente fueron:  
+
+- Forward Euler: \(p \approx 1.21\) → error relativo ≈ 20.9 % respecto al orden teórico (1).  
+- Crank-Nicolson: \(p \approx 2.03\) → error relativo ≈ 1.5 % respecto al orden teórico (2).  
+- Backward Euler: \(p \approx 0.91\) → error relativo ≈ 9.3 % respecto al orden teórico (1).  
+
+En general, los resultados coinciden con lo esperado: Forward y Backward Euler se comportan como métodos de primer orden, mientras que Crank-Nicolson alcanza segundo orden. Las pequeñas diferencias entre valores teóricos y experimentales se deben al rango finito de \(\Delta t\) usado y a los efectos numéricos acumulados. El experimento permitió confirmar de manera clara tanto la estabilidad como los órdenes de convergencia de los tres esquemas.
 
 ---
 
 ### Archivos del Proyecto
 
-* `src/`: Contiene el código fuente que implementa los esquemas de diferencias finitas y realiza los experimentos.
-* `docs/`: Aquí se encuentran los gráficos de log(E) vs log(Δt) y cualquier análisis adicional.
-* `data/`: Almacena los datos generados por las simulaciones, si es aplicable.
+- `src/`: Código fuente con la implementación de los métodos.  
+- `docs/`: Gráficas de estabilidad y error.  
+- `data/`: Datos generados en las simulaciones.  
 
 ---
 
 ### Instrucciones de Uso
 
-1.  Clona este repositorio.
-2.  Instala las dependencias necesarias.
+1. Clonar el repositorio.  
+2. Instalar dependencias necesarias.  
+3. Ejecutar los scripts en `src/` para reproducir los resultados.  
