@@ -1,6 +1,6 @@
 # Punto 1/ Cálculo de Volumen por Interpolación Numérica
 
-Este proyecto se enfoca en el cálculo del volumen de un objeto tridimensional con una forma compleja (una chocolatera) utilizando la combinación de dos métodos numéricos: **interpolación de Lagrange** y la **integración por el método trapezoidal**. El objetivo fue modelar la geometría del objeto a partir de una digitalización 2D para, posteriormente, calcular su volumen.
+Este proyecto se enfoca en el cálculo del volumen de un objeto tridimensional con una forma compleja (una chocolatera) utilizando la combinación de dos métodos numéricos: **interpolación de Lagrange** y la **integración por el método trapezoidal/regla de simpson**. El objetivo fue modelar la geometría del objeto a partir de una digitalización 2D para, posteriormente, calcular su volumen.
 
 ---
 
@@ -12,7 +12,7 @@ El proceso se ejecutó en los siguientes pasos secuenciales:
 
 2.  **Interpolación Polinómica**: Para obtener una función continua que describiera la forma del objeto, se aplicó el **método de interpolación de Lagrange**. Este método generó un polinomio único de grado $n-1$ que pasa exactamente por los $n$ puntos de datos tomando subintervalos, para este caso, elegimos parabolas y subdividimos los intervalos en 3 puntos, creando así una curva a trozos que modela el perfil de la chocolatera.
 
-3.  **Cálculo de Volumen por Integración**: El volumen del sólido de revolución se calculó integrando la función obtenida en el paso anterior. Para ello, se empleó el **método del trapecio**, una técnica de integración numérica que aproxima el área bajo la curva dividiéndola en una serie de trapezoides y sumando sus áreas. 
+3.  **Cálculo de Volumen por Integración**: El volumen del sólido de revolución se calculó integrando la función obtenida en el paso anterior. Para ello, se empleó el **método del trapecio** y el **método parabolobico**, dos técnicas de integración numérica que aproximan el área bajo la curva dividiéndola en una serie de trapezoides y parabolas para acabar sumando sus áreas. 
 
     La fórmula utilizada para el volumen de un sólido de revolución es:
     $$V = \int_{a}^{b} \pi [f(x)]^2 dx$$
