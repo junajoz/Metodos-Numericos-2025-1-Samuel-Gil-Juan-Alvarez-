@@ -16,7 +16,7 @@ Este proyecto se basa en un enfoque de lenguaje natural y requiere que se sigan 
 
 ---
 
-### Prompt Utilizado (Chat GPT)
+### Prompt Utilizado (Gemini).
 
 
 ```text
