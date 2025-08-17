@@ -13,9 +13,7 @@ La organización del repositorio está pensada para la claridad y la accesibilid
 
 
 * **`/Proyecto_X`**: Cada mini-proyecto reside en su propio directorio.
-* **`/Proyecto_X/src`**: Contiene los scripts y el código fuente (`.py`, `.m`, etc.) del proyecto.
 * **`/Proyecto_X/docs`**: Almacena documentos, reportes, imágenes, gráficos y cualquier otra documentación relevante.
-* **`/Proyecto_X/data`**: Guarda los archivos de datos de entrada o de salida utilizados en el proyecto.
 * **`/Proyecto_X/README.md`**: Cada proyecto tiene su propio archivo README que describe su objetivo, los métodos aplicados, los resultados y las instrucciones de uso.
 
 ---
