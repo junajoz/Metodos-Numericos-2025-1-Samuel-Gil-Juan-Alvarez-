@@ -8,7 +8,7 @@ Este proyecto se enfoca en el cálculo del volumen de un objeto tridimensional c
 
 El proceso se ejecutó en los siguientes pasos secuenciales:
 
-1.  **Digitalización de la Geometría**: A partir de una fotografía, se extrajo un conjunto de puntos de datos que representaban el perfil de la chocolatera. Estos puntos (`(x, y)` o, en este caso, `(radio, altura)`) sirvieron como la entrada de datos para el análisis.
+1.  **Digitalización de la Geometría**: A partir de una fotografía, se extrajo un conjunto de puntos de datos de manera manual que representaban el perfil de la chocolatera. Estos puntos (`(x, y)`) sirvieron como la entrada de datos para el análisis.
 
 2.  **Interpolación Polinómica**: Para obtener una función continua que describiera la forma del objeto, se aplicó el **método de interpolación de Lagrange**. Este método generó un polinomio único de grado $n-1$ que pasa exactamente por los $n$ puntos de datos tomando subintervalos, para este caso, elegimos parabolas y subdividimos los intervalos en 3 puntos, creando así una curva a trozos que modela el perfil de la chocolatera.
 
