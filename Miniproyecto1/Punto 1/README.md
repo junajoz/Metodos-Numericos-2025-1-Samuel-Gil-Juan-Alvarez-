@@ -21,7 +21,7 @@ El proceso se ejecutó en los siguientes pasos secuenciales:
 
 ### Resultados y Análisis
 
-El volumen calculado numéricamente se comparó con el volumen real del objeto, resultando en un **error porcentual del 15.19%**.
+El volumen calculado numéricamente se comparó con el volumen real del objeto, resultando en un **error porcentual del 15.19% y 15.16% para cada metodo respectivamente**.
 
 Este error, considerablemente alto, se atribuye principalmente a las limitaciones en la etapa de digitalización. La naturaleza manual de la extracción de puntos a partir de una imagen bidimensional introduce imprecisiones inherentes que son susceptibles a la dispersión. Pequeñas variaciones en la perspectiva de la fotografía o en la selección de los puntos pueden alterar significativamente la forma del polinomio de Lagrange o su ubicación con respecto al eje coordenado, afectando la precisión del volumen final. Este resultado subraya la sensibilidad de los métodos numéricos a la calidad de los datos de entrada.
 
