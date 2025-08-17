@@ -58,4 +58,4 @@ Este repositorio está pensado para ser un portafolio personal. Las contribucion
 ### Autor
 
 * **[Juan Alvarez]** - [junajoz](https://github.com/junajoz)
-* * **[Samuel Gil]** - [Tu Perfil de GitHub](https://github.com/tu_usuario)
+* **[Samuel Gil]** - [Mrgil1307](https://github.com/Mrgil1307)
