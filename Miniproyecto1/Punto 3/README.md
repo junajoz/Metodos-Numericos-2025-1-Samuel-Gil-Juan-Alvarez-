@@ -20,7 +20,7 @@ Este proyecto se basa en un enfoque de lenguaje natural y requiere que se sigan 
 
 
 ```text
-[PEGA AQUÍ EL PROMPT QUE USaste]
+[Conociendo que en el calculo vectorial se tiene que dxdy = Jdudv, y que esa relación asegura que los sistemas coordenados se transformen correctamente, que trasfondo tiene o que explicación hay detrás de esa relación matemática?]
 ```
 
 ### Resumen
@@ -29,4 +29,4 @@ La explicación general se enfoca en el concepto del Jacobiano como un factor de
 
 ### Archivos
 
-En la carpeta /docs se encuentra el .tex donde se desarrolla el punto.
+En la carpeta /docs se encuentra el .tex y el .pdf donde se desarrolla el punto.
