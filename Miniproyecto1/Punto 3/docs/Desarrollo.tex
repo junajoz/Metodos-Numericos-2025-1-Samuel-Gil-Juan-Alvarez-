@@ -7,14 +7,14 @@
 \graphicspath{{images/}}
 
 \title{El Jacobiano y la Transformación de Áreas en Cálculo Vectorial}
-\author{Asistente de IA}
+\author{Juan Jose Alvarez - Samuel Gil}
 \date{\today}
 
 \begin{document}
 \maketitle
 
-\section*{Prompt Utilizado}
-\section*{Conociendo que en el calculo vectorial se tiene que dxdy = Jdudv, y que esa relación asegura que los sistemas coordenados se transformen correctamente, que trasfondo tiene o que explicación hay detrás de esa relación matemática?}
+\section*{Prompt Utilizado - Gemini}
+Conociendo que en el calculo vectorial se tiene que dxdy = Jdudv, y que esa relación asegura que los sistemas coordenados se transformen correctamente, que trasfondo tiene o que explicación hay detrás de esa relación matemática?
 
 \section*{Introducción}
 En el cálculo vectorial, la relación $dx\,dy = |J|\,du\,dv$ es fundamental para asegurar que la integración se realice correctamente cuando se cambia de un sistema de coordenadas a otro. Esta ecuación no es solo una fórmula, sino que representa un concepto geométrico profundo: el jacobiano actúa como un factor de escala que corrige la distorsión del área.
@@ -84,7 +84,55 @@ El factor $r$ es crucial porque un cambio infinitesimal de $dr$ y $d\theta$ cubr
 
 ---
 
+\section*{El Jacobiano en la Interpolación 2D}
+El concepto del jacobiano no se limita al cálculo vectorial. También es crucial en la interpolación 2D, ya que esta técnica se basa en una \textbf{transformación de coordenadas} de manera similar.
+
+\subsection*{Mapeo de Coordenadas}
+En la interpolación 2D, se utilizan funciones de forma para mapear un punto de una cuadrícula de referencia (por ejemplo, un cuadrado unitario con coordenadas $\xi, \eta$) a un punto en la cuadrícula real $(x, y)$. Las ecuaciones de transformación son:
+\begin{align*}
+x &= x(\xi, \eta) \\
+y &= y(\xi, \eta)
+\end{align*}
+Para determinar la posición de un punto, se utilizan las coordenadas de los nodos del elemento. El jacobiano de esta transformación es la herramienta que relaciona los cambios en un sistema con los del otro.
+
+\subsection*{El Problema de la Distorsión y el Papel del Jacobiano}
+Cuando se realiza esta transformación, el área del elemento de referencia $(d\xi\,d\eta)$ no es igual al área del elemento real $(dx\,dy)$. El jacobiano, $|J|$, es el factor de corrección que compensa esta distorsión. La relación es:
+\[
+dx\,dy = |J|\,d\xi\,d\eta
+\]
+Esto es crucial para transformar una integral del espacio real al espacio de referencia, permitiendo que los límites de integración sean constantes.
+\[
+\iint_{\text{Real}} f(x, y)\,dx\,dy = \iint_{\text{Ref.}} f(x(\xi, \eta), y(\xi, \eta))\,|J|\,d\xi\,d\eta
+\]
+El término $f(x(\xi, \eta), y(\xi, \eta))$ convierte la función al espacio de referencia, y el $|J|$ ajusta la "medida" del área para que la integral sea correcta.
+El jacobiano $J$ es una medida local de la distorsión del área. Su valor numérico en cada punto indica la tasa de cambio del área. Un valor de $|J| > 1$ indica una expansión, $|J| < 1$ una contracción y $|J| = 0$ un colapso del área.
+
+
+\subsection*{Conexión con las Funciones de Forma}
+En la interpolación 2D, las coordenadas del elemento real $(x, y)$ se definen en términos de las coordenadas de los nodos del elemento $(x_i, y_i)$ y de las funciones de forma $N_i(\xi, \eta)$.
+\begin{align*}
+x(\xi, \eta) &= \sum_{i=1}^{n} N_i(\xi, \eta)\,x_i \\
+y(\xi, \eta) &= \sum_{i=1}^{n} N_i(\xi, \eta)\,y_i
+\end{align*}
+Las derivadas parciales que componen el jacobiano se obtienen de estas ecuaciones, por lo que el valor de $J$ no es constante, sino que cambia de un punto a otro, reflejando cómo la transformación estira o encoge el espacio localmente. Si el jacobiano es nulo, la transformación no es válida.
+
+---
+
 \section*{Conclusión}
-En resumen, el jacobiano es la herramienta matemática que permite el cambio de variables en las integrales, compensando las deformaciones geométricas del área causadas por la transformación de coordenadas. Su valor numérico en cada punto representa el factor por el cual el área se magnifica o reduce localmente.
+En resumen, el jacobiano es la herramienta matemática que permite el cambio de variables en las integrales, compensando las deformaciones geométricas del área causadas por la transformación de coordenadas. Su valor numérico en cada punto representa el factor por el cual el área se magnifica o reduce localmente. En la interpolación 2D, esta capacidad es vital para conectar las coordenadas del espacio real con las del espacio de referencia, permitiendo una correcta transformación de las ecuaciones y la realización de cálculos precisos.
+\section*{Notas}
+Cuando se le solicitaron las referencias a Gemini, nos dio los siguientes textos guía que consultó y el motivo por el que los eligió:
+
+- Zienkiewicz, O. C., & Taylor, R. L. (2000). The Finite Element Method: Its Basis and Fundamentals. Butterworth-Heinemann.
+
+Justificación: Este es uno de los textos clásicos y más influyentes sobre el MEF. Explica en detalle las formulaciones isoperimétricas y el papel crucial del jacobiano en el mapeo de coordenadas y el cálculo de matrices de elementos finitos. Es una referencia fundamental para cualquier estudio serio en el campo.
+
+- Cook, R. D., Malkus, D. S., & Plesha, M. E. (2002). Concepts and Applications of Finite Element Analysis. Wiley.
+
+Justificación: Este libro es conocido por su claridad y enfoque práctico. Dedica secciones enteras a la matriz jacobiana y su inverso, explicando su uso para la transformación de derivadas y la integración numérica sobre elementos deformados.
+
+- Strang, G. (2016). Introduction to Linear Algebra. Wellesley-Cambridge Press.
+
+Justificación: Aunque no es un libro de MEF, ofrece una comprensión profunda de los determinantes, las transformaciones lineales y la regla de la cadena, que son los pilares matemáticos detrás del jacobiano. Es una excelente base teórica.
 
 \end{document}
