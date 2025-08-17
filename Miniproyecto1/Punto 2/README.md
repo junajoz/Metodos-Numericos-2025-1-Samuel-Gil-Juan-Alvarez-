@@ -54,9 +54,9 @@ El esquema implícito fue estable en todos los casos, sin oscilaciones ni diverg
 
 Los valores estimados de pendiente fueron:  
 
-- Forward Euler: \(p \approx 1.21\) → error relativo ≈ 20.9 % respecto al orden teórico (1).  
-- Crank-Nicolson: \(p \approx 2.03\) → error relativo ≈ 1.5 % respecto al orden teórico (2).  
-- Backward Euler: \(p \approx 0.91\) → error relativo ≈ 9.3 % respecto al orden teórico (1).  
+- Forward Euler: 1.21 → error relativo ≈ 20.9 % respecto al orden teórico (1).  
+- Crank-Nicolson: 2.03 → error relativo ≈ 1.5 % respecto al orden teórico (2).  
+- Backward Euler: 0.91 → error relativo ≈ 9.3 % respecto al orden teórico (1).  
 
 En general, los resultados coinciden con lo esperado: Forward y Backward Euler se comportan como métodos de primer orden, mientras que Crank-Nicolson alcanza segundo orden. Las pequeñas diferencias entre valores teóricos y experimentales se deben al rango finito de \(\Delta t\) usado y a los efectos numéricos acumulados. El experimento permitió confirmar de manera clara tanto la estabilidad como los órdenes de convergencia de los tres esquemas.
 
