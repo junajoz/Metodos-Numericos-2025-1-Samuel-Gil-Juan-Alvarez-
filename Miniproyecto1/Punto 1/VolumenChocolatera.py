@@ -1,6 +1,6 @@
 import numpy as np
 import matplotlib.pyplot as plt
-from scipy.integrate import simpson
+from scipy.integrate import simpson, trapezoid
 
 # -------------------------------
 # Datos originales
@@ -54,19 +54,37 @@ x_interp = np.array(x_interp)
 y_interp = np.array(y_interp)
 
 # -------------------------------
-# Calcular volumen de revolución
+# Calcular volumen de revolución (Simpson)
 # -------------------------------
-V_mm3 = np.pi * simpson(y_interp**2, x_interp)  # mm³
-V_mL = V_mm3 / 1000  # mL
+V_simpson_mm3 = np.pi * simpson(y_interp**2, x_interp)
+V_simpson_mL = V_simpson_mm3 / 1000
 
 # -------------------------------
-# Resultados
+# Regla del Trapecio
 # -------------------------------
+V_trapezoid_mm3 = np.pi * trapezoid(y_interp**2, x_interp)
+V_trapezoid_mL = V_trapezoid_mm3 / 1000
+
+# -------------------------------
+# Resultados y comparación
+# -------------------------------
+V_real_mL = 2200 # mL
+error_simpson = abs((V_simpson_mL - V_real_mL) / V_real_mL) * 100
+error_trapezoid = abs((V_trapezoid_mL - V_real_mL) / V_real_mL) * 100
 
 print("Polinomios por tramo (grado 2):")
 for i, (poly, x_start, x_end) in enumerate(piecewise_polys):
     print(f"Tramo {i+1} ({x_start:.3f} a {x_end:.3f}): y = {poly}")
-error = abs((V_mL-2200)/2200)*100
+
+print("\n--- Resultados del Cálculo de Volumen ---")
+print(f"Volumen (Regla de Simpson) ≈ {V_simpson_mL:.2f} mL")
+print(f"Error con Regla de Simpson = {error_simpson:.2f} %")
+print("-" * 35)
+print(f"Volumen (Regla del Trapecio) ≈ {V_trapezoid_mL:.2f} mL")
+print(f"Error con Regla del Trapecio = {error_trapezoid:.2f} %")
+print("-" * 35)
+print(f"Diferencia entre métodos = {abs(V_simpson_mL - V_trapezoid_mL):.2f} mL")
+
 
 # -------------------------------
 # Gráfica
@@ -80,6 +98,3 @@ plt.title('Interpolación de Lagrange por tramos (grado 2) - Datos limpios')
 plt.legend()
 plt.grid(True)
 plt.show()
-
-print(f"Volumen por revolución ≈ {V_mL:.2f} mL\n")
-print(f"Se obtuvo un error de = {error:.2f}%\n")
