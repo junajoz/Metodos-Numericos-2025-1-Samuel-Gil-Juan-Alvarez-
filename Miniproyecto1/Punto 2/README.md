@@ -8,8 +8,8 @@ Este proyecto aplica distintos esquemas de diferencias finitas para resolver la 
 
 Se trabajó con tres esquemas de integración temporal:
 
-1. **Euler Explícito (Forward Euler):** Método condicionalmente estable. Requiere que el paso de tiempo cumpla \(\Delta t < 2/a\) para evitar crecimiento no físico y \(\Delta t < 1/a\) para que no aparezcan oscilaciones.
-2. **Crank-Nicolson:** Es incondicionalmente estable respecto a crecimiento, pero puede presentar oscilaciones si \(\Delta t > 2/a\).
+1. **Euler Explícito (Forward Euler):** Método condicionalmente estable. Requiere que el paso de tiempo cumpla delta t < 2/a para evitar crecimiento no físico y delta t < 1/a para que no aparezcan oscilaciones.
+2. **Crank-Nicolson:** Es incondicionalmente estable respecto a crecimiento, pero puede presentar oscilaciones si delta t > 2/a.
 3. **Euler Implícito (Backward Euler):** Es incondicionalmente estable tanto frente a crecimiento como a oscilaciones.
 
 ---
@@ -17,7 +17,7 @@ Se trabajó con tres esquemas de integración temporal:
 ### Objetivos del Experimento
 
 - Verificar de manera práctica la estabilidad de los tres métodos.  
-- Encontrar la relación entre \(\log(E)\) y \(\log(\Delta t)\) para estimar el orden de convergencia.  
+- Encontrar la relación entre log(E) y log(delta t) para estimar el orden de convergencia.  
 - Comparar los resultados con los órdenes teóricos.  
 
 ---
@@ -26,24 +26,22 @@ Se trabajó con tres esquemas de integración temporal:
 
 El error global de cada simulación se midió con la norma:
 
-\[
-E = \sqrt{\Delta t \sum_{n=0}^{N_t} (e^n)^2}
-\]
+`E = sqrt(Δt * Σ (e^n)^2)`
 
-donde \(e^n\) es el error puntual en el tiempo \(t_n\).  
+donde e^n es el error puntual en el tiempo t_n.  
 
 ---
 
 ### Resultados, Gráficos y Discusión
 
-Las simulaciones se realizaron con \(\Delta t = [1.25, 0.625, 0.3125, 0.15625, 0.078125, 0.0390625]\), usando \(a=2\).  
+Las simulaciones se realizaron con delta t = [1.25, 0.625, 0.3125, 0.15625, 0.078125, 0.0390625], usando a=2.  
 
 #### **1. Forward Euler**
-Para \(\Delta t = 1.25\) el método diverge, confirmando que no cumple la condición de estabilidad, mientras que para \(\Delta t = 0.625\) la respuesta es oscilatoria, pero decreciento. Con pasos más pequeños, la solución se mantiene estable y el análisis log–log del error muestra una zona lineal con pendiente cercana a 1.  
+Para delta t = 1.25 el método diverge, confirmando que no cumple la condición de estabilidad, mientras que para delta t = 0.625 la respuesta es oscilatoria, pero decreciento. Con pasos más pequeños, la solución se mantiene estable y el análisis log–log del error muestra una zona lineal con pendiente cercana a 1.  
 ![Forward Euler - Estabilidad y Orden](docs/forward_euler_plots.png)
 
 #### **2. Crank-Nicolson**
-Se mantuvo estable incluso con \(\Delta t = 1.25\), aunque en ese caso aparecieron oscilaciones. Para pasos menores, el error decrece con pendiente cercana a 2 en la gráfica log–log, como se espera para un método de segundo orden.  
+Se mantuvo estable incluso con delta t = 1.25, aunque en ese caso aparecieron oscilaciones. Para pasos menores, el error decrece con pendiente cercana a 2 en la gráfica log–log, como se espera para un método de segundo orden.  
 ![Crank-Nicolson - Estabilidad y Orden](docs/crank_nicolson_plots.png)
 
 #### **3. Backward Euler**
