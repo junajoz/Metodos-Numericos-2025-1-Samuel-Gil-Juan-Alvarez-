@@ -84,5 +84,9 @@ for method in methods:  # Ciclo sobre los diferentes métodos
         bbox=dict(boxstyle="round,pad=0.3", facecolor="white", alpha=0.8, edgecolor="none"),
     )
     fig.tight_layout()
+
+    # === Guardar figuras en una ruta especificada ===
+    fig.savefig(r"C:\{method}.png".format(method=method.replace(" ", "_")), dpi=300)
+    
     plt.show()
     m += 1
