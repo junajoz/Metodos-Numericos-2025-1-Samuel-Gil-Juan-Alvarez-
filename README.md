@@ -47,12 +47,6 @@ Este proyecto utiliza las siguientes tecnologías y librerías para el desarroll
 
 ---
 
-### Contribuciones
-
-Este repositorio está pensado para ser un portafolio personal. Las contribuciones externas no están activas en este momento.
-
----
-
 ### Autor
 
 * **[Juan Alvarez]** - [junajoz](https://github.com/junajoz)
