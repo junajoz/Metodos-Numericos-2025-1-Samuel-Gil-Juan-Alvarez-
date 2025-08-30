@@ -38,7 +38,7 @@ Las simulaciones se realizaron con delta t = [1.25, 0.625, 0.3125, 0.15625, 0.07
 
 #### **1. Forward Euler**
 Para delta t = 1.25 el método diverge, confirmando que no cumple la condición de estabilidad, mientras que para delta t = 0.625 la respuesta es oscilatoria, pero decreciento. Con pasos más pequeños, la solución se mantiene estable y el análisis log–log del error muestra una zona lineal con pendiente cercana a 1.  
-![Forward Euler - Estabilidad y Orden](docs/Foward_Euler.png)
+![Forward Euler - Estabilidad y Orden](docs/Forward_Euler.png)
 
 #### **2. Crank-Nicolson**
 Se mantuvo estable incluso con delta t = 1.25, aunque en ese caso aparecieron oscilaciones. Para pasos menores, el error decrece con pendiente cercana a 2 en la gráfica log–log, como se espera para un método de segundo orden.  
