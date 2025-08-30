@@ -12,15 +12,17 @@ Cada proyecto es un estudio de caso independiente que se enfoca en un método es
 La organización del repositorio está pensada para la claridad y la accesibilidad.
 
 
-* **`/Proyecto_X`**: Cada mini-proyecto reside en su propio directorio.
-* **`/Proyecto_X/docs`**: Almacena documentos, reportes, imágenes, gráficos y cualquier otra documentación relevante.
-* **`/Proyecto_X/README.md`**: Cada proyecto tiene su propio archivo README que describe su objetivo, los métodos aplicados, los resultados y las instrucciones de uso.
+* **`/MiniproyectoX`**: Cada mini-proyecto reside en su propio directorio.
+* **`/MiniproyectoX/docs`**: Almacena documentos, reportes, imágenes, gráficos y cualquier otra documentación relevante.
+* **`/MiniproyectoX/README.md`**: Cada proyecto tiene su propio archivo README que describe su objetivo, los métodos aplicados, los resultados y las instrucciones de uso.
 
 ---
 
 ### Proyectos Incluidos
 
 A continuación, se presenta un listado de los proyectos realizados.
+
+#### Miniproyecto 1
 
 * **[Solución de la curva de una chocolatera]**:
     * Descripción: Calculo de la curva que describe una chocolatera y calculo de su volumen empleando metodos numericos.
