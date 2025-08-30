@@ -31,7 +31,7 @@ Este error, considerablemente alto, se atribuye principalmente a las limitacione
 
 * `VolumenChocolatera.py`: Contiene el código fuente que implementa los algoritmos de interpolación y cálculo de volumen.
 * `ImagenChocolatera.py`: Almacena el código con el que se extrajeron los puntos de la chocolatera.
-* `documentos/`: Aquí se encuentra la imagen de la grafica de la curva interpolada y la chocolatera.
+* `docs/`: Aquí se encuentra la imagen de la grafica de la curva interpolada y la chocolatera.
 
 ---
 
