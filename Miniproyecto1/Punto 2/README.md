@@ -64,9 +64,7 @@ En general, los resultados coinciden con lo esperado: Forward y Backward Euler s
 
 ### Archivos del Proyecto
 
-- `src/`: Código fuente con la implementación de los métodos.  
 - `docs/`: Gráficas de estabilidad y error.  
-- `data/`: Datos generados en las simulaciones.  
 
 ---
 
@@ -74,4 +72,4 @@ En general, los resultados coinciden con lo esperado: Forward y Backward Euler s
 
 1. Clonar el repositorio.  
 2. Instalar dependencias necesarias.  
-3. Ejecutar los scripts en `src/` para reproducir los resultados.  
+3. Ejecutar el script dentro de la carpeta llamada Punto 2.
