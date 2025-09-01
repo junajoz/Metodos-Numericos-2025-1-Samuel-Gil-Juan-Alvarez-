@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 a = 2.0
 I = 1.0
 T = 5.0
-dt_values = [1.25, 0.625, 0.3125, 0.15625, 0.078125, 0.0390625]  # Varios Δt
+dt_values = [1.25, 0.625, 0.3125, 0.15625, 0.078125, 0.0390625, 0.01953125, 0.009765625, 0.0048828125]  # Varios Δt
 
 # Solución analítica
 t_analytic = np.linspace(0, T, 200)
@@ -13,7 +13,7 @@ u_analytic = I * np.exp(-a * t_analytic)
 
 # Solución numérica
 methods = ['Forward Euler', 'Crank-Nicolson', 'Backward Euler']
-solutions = [[0]*6, [0]*6, [0]*6]
+solutions = [[0]*9, [0]*9, [0]*9]
 
 m = 0
 for method in methods:  # Ciclo sobre los diferentes métodos
