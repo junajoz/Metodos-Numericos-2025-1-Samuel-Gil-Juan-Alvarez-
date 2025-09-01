@@ -53,10 +53,10 @@ Siga estos pasos para recrear el ambiente virtual y ejecutar el proyecto:
 
 1. Clone el repositorio (o descarga el proyecto manualmente):
    git clone <https://github.com/junajoz/Metodos-Numericos-2025-1-Samuel-Gil-Juan-Alvarez-.git>
-   cd <Metodos-Numericos-2025-2-Samuel-Gil-Juan-Alvarez->
+   cd <Metodos-Numericos-2025-1-Samuel-Gil-Juan-Alvarez->
 
 2. Cree un ambiente virtual:
-   python -m venv venv
+   python3.9 -m venv venv
 
 3. Active el ambiente virtual:
    - En Windows (PowerShell):
