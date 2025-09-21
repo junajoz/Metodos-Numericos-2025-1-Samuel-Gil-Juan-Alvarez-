@@ -8,7 +8,7 @@ La ecuación en cuestión es:
 
 ∇²V = 0
 
-El problema fue modelado en 2 dimensiones, considerando las placas como unidimensionales, de longitud l = 4. Las placas están centras en x = 4, posicionadas en y = 2 y y = 4, y con potenciales Vₚ₁ y Vₚ₂, respectivamente. El dominio del problema fue entonces definido como:
+El problema fue modelado en 2 dimensiones, considerando las placas como unidimensionales, de longitud l = 4. Las placas están centradas en x = 4, posicionadas en y = 2 y y = 4, y con potenciales Vₚ₁ y Vₚ₂, respectivamente. El dominio del problema fue entonces definido como:
 
 Ω = [0,8] × [0,6]
 
