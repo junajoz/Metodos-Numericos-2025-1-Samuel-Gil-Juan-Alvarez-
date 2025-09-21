@@ -44,7 +44,7 @@ El modelo numérico implementado logró resolver exitosamente la ecuación de La
 
 La solución obtenida se muestra en la siguiente figura, donde se representa el potencial eléctrico mediante un mapa de colores y sus curvas equipotenciales. Además, a partir del gradiente del potencial se calcularon y graficaron las líneas de campo eléctrico:
 
-![Resultados](.png)
+![Resultados](https://github.com/junajoz/Metodos-Numericos-2025-1-Samuel-Gil-Juan-Alvarez-/blob/main/MIniproyecto2/Punto%201/docs/laplace2d_solucion.png)
 
 Se observa que el potencial se distribuye de manera simétrica entre las placas, con un gradiente pronunciado en la región comprendida entre ellas. Las líneas de campo eléctrico, ortogonales a las curvas equipotenciales, se orientan desde la placa positiva (en y = 2) hacia la negativa (en y = 4), lo cual corresponde al comportamiento esperado para un capacitor de placas paralelas.  
 
