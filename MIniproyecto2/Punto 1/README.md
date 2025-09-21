@@ -38,7 +38,17 @@ Este enfoque permite aproximar la solución de la ecuación de Laplace en el dom
 
 ---
 
-### Resultados y Análisis
+### Resultados y análisis
+---
+El modelo numérico implementado logró resolver exitosamente la ecuación de Laplace en el dominio definido, cumpliendo con las condiciones de frontera y con los potenciales impuestos en las placas internas del capacitor.  
+
+La solución obtenida se muestra en la siguiente figura, donde se representa el potencial eléctrico mediante un mapa de colores y sus curvas equipotenciales. Además, a partir del gradiente del potencial se calcularon y graficaron las líneas de campo eléctrico:
+
+![Resultados](.png)
+
+Se observa que el potencial se distribuye de manera simétrica entre las placas, con un gradiente pronunciado en la región comprendida entre ellas. Las líneas de campo eléctrico, ortogonales a las curvas equipotenciales, se orientan desde la placa positiva (en y = 2) hacia la negativa (en y = 4), lo cual corresponde al comportamiento esperado para un capacitor de placas paralelas.  
+
+El modelo reproduce fielmente la física del problema: el campo eléctrico se concentra principalmente en la región entre las placas, disminuyendo en magnitud al alejarse de ellas. Esto confirma tanto la validez del método de aproximación numérica empleado como la correcta implementación de las condiciones de frontera.
 
 ---
 
