@@ -13,6 +13,32 @@ import scipy.sparse as sp
 import scipy.sparse.linalg as spla
 import matplotlib.pyplot as plt
 
+def solve_with_dirichlet_reduction(K, b, fixed_nodes, fixed_values):
+    """
+    Impone Dirichlet sin editar K:
+      K_ff u_f = b_f - K_fF u_F
+    Devuelve el vector solución completo u (incluye nodos fijos).
+    """
+    fixed_nodes  = np.asarray(fixed_nodes, dtype=int)
+    fixed_values = np.asarray(fixed_values, dtype=float)
+    N = K.shape[0]
+    u = np.zeros(N)
+
+    # DOFs libres
+    all_idx = np.arange(N)
+    free = np.setdiff1d(all_idx, fixed_nodes, assume_unique=False)
+
+    # Sistema reducido
+    K_ff = K[free][:, free]
+    K_fF = K[free][:, fixed_nodes]
+    b_f  = b[free] - K_fF @ fixed_values
+
+    # Resolver y recomponer
+    u[fixed_nodes] = fixed_values
+    u[free] = spla.spsolve(K_ff, b_f)
+    return u
+
+
 def mesh_rectangular(Lx, Ly, nx, ny):
     """Genera una malla rectangular de nodos y elementos triangulares."""
     x = np.linspace(0, Lx, nx)
@@ -53,14 +79,6 @@ def assemble_global_matrix(nodes, elements):
                 K[elem[i], elem[j]] += ke[i, j]
     return K.tocsr()
 
-def apply_dirichlet_bc(K, f, boundary_nodes, boundary_values):
-    """Aplica condiciones de Dirichlet a la matriz y vector."""
-    for node, value in zip(boundary_nodes, boundary_values):
-        K[node, :] = 0
-        K[node, node] = 1
-        f[node] = value
-    return K, f
-
 def main():
     # Parámetros de la malla y del problema
     Lx, Ly = 8.0, 6.0
@@ -79,7 +97,7 @@ def main():
     boundary_values = []
     for i in range(n_nodes):
         xi, yi = nodes[i]
-        if xi == 0 or xi == Lx or yi == 0 or yi == Ly:
+        if (np.isclose(xi, 0.0) or np.isclose(xi, Lx) or np.isclose(yi, 0.0) or np.isclose(yi, Ly)):
             boundary_nodes.append(i)
             boundary_values.append(0.0)
         elif 2.0 <= xi <= 6.0 and np.isclose(yi, 2.0):
@@ -88,8 +106,8 @@ def main():
         elif 2.0 <= xi <= 6.0 and np.isclose(yi, 4.0):
             boundary_nodes.append(i)
             boundary_values.append(Vp2)
-    K, f = apply_dirichlet_bc(K, f, boundary_nodes, boundary_values)
-    V = spla.spsolve(K, f)
+    V = solve_with_dirichlet_reduction(K, f, boundary_nodes, boundary_values)
+
     V_grid = V.reshape((ny, nx))
     plt.figure(figsize=(8, 6))
     cp = plt.contourf(X, Y, V_grid, levels=50, cmap='jet')
@@ -101,5 +119,6 @@ def main():
     plt.show()
     # Guardar resultados en archivo
     np.savetxt('laplace2d_solution.txt', np.column_stack((nodes, V)), header='x y V', comments='')
+
 if __name__ == "__main__":
     main()
