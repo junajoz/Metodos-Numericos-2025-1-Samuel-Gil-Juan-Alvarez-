@@ -63,5 +63,5 @@ El modelo reproduce fielmente la física del problema: el campo eléctrico se co
 
 1.  Clona este repositorio.
 2.  Instala las dependencias necesarias: `numpy`, `scipy`, `matplotlib`.
-3.  Ejecuta el script principal `VolumenChocolatera.py`.
+3.  Ejecuta el script principal `Laplace2D.py`.
 
