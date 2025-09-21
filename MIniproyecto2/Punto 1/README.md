@@ -33,6 +33,7 @@ V(x,4) = Vₚ₂, ∀x ∈ [2,6]
 ### Archivos del Proyecto
 
 * `Laplace2D.py`: Contiene el código fuente que implementa los algoritmos de solución y gráfico de la ecuación.
+* `laplace2d_solucion.png`: Contiene la imagen representando la solución del problema como un mapa de calor, donde el color indica la magnitud del potencial eléctrico en un punto del plano xy.
 
 ---
 
