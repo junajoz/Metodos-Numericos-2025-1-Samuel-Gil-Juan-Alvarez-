@@ -181,7 +181,7 @@ def main():
     trazar_potencial_y_campo(
         X, Y, V_grid, Vp1, Vp2,
         ruta_salida=r"D:\stuff\Semestre 6\Metodos\Metodos-Numericos-2025-1-Samuel-Gil-Juan-Alvarez-\MIniproyecto2\Punto 1\docs\laplace2d_solucion.png",
-        dibujar_placas=True
+        dibujar_placas=False
     )
 
     # Si quieres exportar datos numéricos:
