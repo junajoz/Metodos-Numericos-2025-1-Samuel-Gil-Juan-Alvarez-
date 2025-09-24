@@ -34,6 +34,12 @@ A continuación, se presenta un listado de los proyectos realizados.
     * Descripción: Uso de herramientas de lenguaje natural para el entendimiento de una propiedad matematica que permite el uso de metodos numericos en más dimensiones.
     * Métodos: Modelos de lenguaje natural.
 
+### Miniproyecto 2
+
+* **[Solución de la ecuación de Laplace]**:
+     * Descripción: Solución la ecuación de Laplace para calcular el potencial eléctrico en un sistema de
+       capacitor con placas paralelas.
+     * Métodos: Esquema de diferencias finitas en 2 dimensiones
 ---
 
 ### Tecnologías y Librerías
