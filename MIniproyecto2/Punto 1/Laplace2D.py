@@ -78,7 +78,6 @@ def assemble_A_b(nx, ny, dx, dy, x, y, Vp1, Vp2,
             A[p, p + 1]   = inv_dx2           # ← vecino i+1, j
             A[p, p - nx]  = inv_dy2           # ← vecino i, j-1
             A[p, p + nx]  = inv_dy2           # ← vecino i, j+1
-            # b[p] = 0 por defecto (Laplace), ya quedó en cero arriba
     return A.tocsr(), b
 
 def trazar_potencial_y_campo(X, Y, V_grid, Vp1, Vp2,
@@ -120,7 +119,7 @@ def trazar_potencial_y_campo(X, Y, V_grid, Vp1, Vp2,
 
 
 def main():
-    # Dominio y malla (dx=dy=0.1 → y=2 y 4 caen exactamente en la grilla)
+    # Dominio y malla 
     Lx, Ly = 8.0, 6.0
     nx, ny = 81, 61
     Vp1, Vp2 = 1.0, -1.0
@@ -132,7 +131,7 @@ def main():
     # Ensamble directo A y b (incluye bordes y placas)
     A, b = assemble_A_b(nx, ny, dx, dy, x, y, Vp1, Vp2)
 
-    # Resolver A V = b (una sola vez, sin reducción)
+    # Resolver A V = b
     V = spla.spsolve(A, b)
 
     # Post-proceso
