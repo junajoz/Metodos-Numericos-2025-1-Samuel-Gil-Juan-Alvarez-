@@ -25,6 +25,8 @@ Esto, con el objetivo de observar
 ### Archivos del Proyecto
 
 * `script.py`: Contiene el código fuente que implementa los algoritmos de solución y gráficos de las soluciones.
+* `poisson_1D.png`: Contiene el gráfico de la solución obtenida con el Método de Elementos Finitos junto con la solución analítica de la ecuación, para hacer una comparación cualitativa.
+* `load_function.png`: Contiene el gráfico de la función de carga $$ f(x) $$ usada, graficada en el dominio de la solución.
 
 ---
 
