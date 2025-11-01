@@ -56,4 +56,89 @@ def plot_mesh(mesh):
     plt.grid()
     plt.show()
 
-plot_mesh(generate_random_mesh(10, 0.1))  # Example usage of plot_mesh with a random mesh
+
+def global_stiffness_matrix(mesh):
+    """Build the global stiffness matrix directly from the weak form: K_ij = <phi_i', phi_j'>, using analytical
+    expressions worked out by hand"""
+    n = len(mesh)
+    K = np.zeros((n, n))
+    h = np.diff(mesh)
+
+    # internal nodes
+    for i in range(1, n - 1):
+        K[i, i - 1] = -1.0 / h[i - 1]
+        K[i, i] = 1.0 / h[i - 1] + 1.0 / h[i]
+        K[i, i + 1] = -1.0 / h[i]
+
+    # Dirichlet BCs (u(0)=u(1)=0): first and last rows zero, diagonal ones
+    K[0, 0] = 1.0
+    K[-1, -1] = 1.0
+    return K
+
+
+def gaussian_quadrature(mesh, f, nq=3):
+    """
+    Compute the load vector b using from the definition: b_i = <f, phi_i>, Gaussian quadrature on each element.
+    """
+    n = len(mesh)
+    b = np.zeros(n)
+    for i in range(n - 1):
+        x_l, x_r = mesh[i], mesh[i + 1]
+        h = x_r - x_l
+
+        # local basis functions
+        def phi_l(x): return (x_r - x) / h
+        def phi_r(x): return (x - x_l) / h
+
+        # integrate contributions to b_i and b_{i+1}
+        I_l, _ = fixed_quad(lambda x: f(x) * phi_l(x), x_l, x_r, n=nq)
+        I_r, _ = fixed_quad(lambda x: f(x) * phi_r(x), x_l, x_r, n=nq)
+
+        b[i] += I_l
+        b[i + 1] += I_r
+
+    # Apply Dirichlet BCs (zero at boundaries)
+    b[0] = 0.0
+    b[-1] = 0.0
+    return b
+
+
+def solve_vector_equation(K, b):
+    """
+    Solve the vector equation K*u = b for u.
+    """
+    u = np.linalg.solve(K, b)
+    return u
+
+
+# Main
+def solve():
+    n = 10
+    std_dev = 0.05
+    mesh = generate_random_mesh(n, std_dev)
+
+    def f(x):
+        return 4 * x - 6
+
+    K = global_stiffness_matrix(mesh)
+    b = gaussian_quadrature(mesh, f)
+    u = solve_vector_equation(K, b)
+
+    # Plot
+    plt.figure()
+    plt.plot(mesh, u, '-o', label='FEM solution')
+    # exact solution with u(0)=u(1)=0
+    x = np.linspace(0, 1, 400)
+    u_exact = -(2 / 3) * x**3 + 3 * x**2 - (7 / 3) * x
+    plt.plot(x, u_exact, '--', label='Exact solution')
+    plt.xlabel('x')
+    plt.ylabel('u(x)')
+    plt.title('FEM Solution of Poisson Equation')
+    plt.legend()
+    plt.grid()
+    plt.show()
+
+    return mesh, u, K, b
+
+
+solve()
