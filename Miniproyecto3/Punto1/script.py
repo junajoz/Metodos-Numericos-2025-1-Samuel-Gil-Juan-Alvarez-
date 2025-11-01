@@ -127,9 +127,10 @@ def solve():
     b = gaussian_quadrature(mesh, f)
     u = solve_vector_equation(K, b)
 
-    # Plot
+   # Plot
     plt.figure()
     plt.plot(mesh, u, '-o', label='FEM solution')
+
     # exact solution with u(0)=u(1)=0
     x = np.linspace(0, 1, 400)
     u_exact = -(2 / 3) * x**3 + 3 * x**2 - (7 / 3) * x
@@ -139,6 +140,18 @@ def solve():
     plt.title('FEM Solution of Poisson Equation')
     plt.legend()
     plt.grid()
+    plt.savefig("poisson_1D.png")
+    plt.show()
+
+    # Plotting f(x)
+    f_points = f(x)
+    plt.plot(x, f_points, label='f(x) = 4x - 6')
+    plt.xlabel('x')
+    plt.ylabel('f(x)')
+    plt.title('Load function')
+    plt.legend()
+    plt.grid()
+    plt.savefig("load_function.png")
     plt.show()
 
     return mesh, u, K, b
