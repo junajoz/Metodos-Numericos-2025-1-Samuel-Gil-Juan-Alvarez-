@@ -25,13 +25,15 @@ $$
 b_i = \langle f, \phi_i \rangle
 $$
 
-Para la función base lineal tipo “hat”, la matriz de rigidez global se obtiene a partir de los tamaños de elemento no uniformes \(h_i = x_i - x_{i-1}\):
+Para la función base lineal tipo “hat”, la matriz de rigidez global se obtiene a partir de los tamaños de elemento no uniformes $$\(h_i = x_i - x_{i-1}\)$$:
 
+$$
 \[
 K_{i,i-1} = -\frac{1}{h_i}, \quad
 K_{i,i} = \frac{1}{h_i} + \frac{1}{h_{i+1}}, \quad
 K_{i,i+1} = -\frac{1}{h_{i+1}}
 \]
+$$
 
 La malla se genera a partir de una distribución gaussiana centrada en los puntos de una malla uniforme, y los términos del vector \(b\) se calculan mediante **cuadratura gaussiana** en cada elemento.
 
