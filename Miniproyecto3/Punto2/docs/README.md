@@ -2,11 +2,11 @@
 
 ## Descripción General
 Este proyecto implementa un **análisis por elementos finitos (FEM)** de la **deformación superficial** de un espejo con geometría **hexagonal**, sometido a una carga espacial simulada descrita por la **ecuación de Poisson**:
-
+$$
 \[
 \nabla^2 u(x,y) = -f(x,y)
 \]
-
+$$
 donde \(u(x,y)\) representa la deformación del espejo y \(f(x,y)\) la carga distribuida.  
 El objetivo es analizar cómo las variaciones en los parámetros físicos de la carga afectan la deformación máxima del espejo y, por ende, la calidad óptica de la imagen reflejada.
 
