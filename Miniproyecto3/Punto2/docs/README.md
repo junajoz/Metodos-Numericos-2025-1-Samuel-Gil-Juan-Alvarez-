@@ -59,7 +59,6 @@ donde:
 
 ### 🔹 Distribución de carga
 ![Distribución de carga](load_distribution.png)  
-La carga es mayor hacia los bordes del espejo (por el término radial \(\beta r^2\)) con ligera asimetría angular (\(\gamma \cos(\phi-\theta)\)).
 
 ---
 
@@ -145,3 +144,5 @@ Los resultados univariados muestran relaciones casi lineales entre \(u_{max}\) y
 1. **Clonar el repositorio:**
    ```bash
    git clone https://github.com/tu_usuario/analisis-poisson-espejo.git
+2. **Instala depencencias necesarias**
+numpy scipy matplotlib seaborn pandas
