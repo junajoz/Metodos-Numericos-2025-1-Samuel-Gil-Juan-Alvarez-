@@ -10,7 +10,7 @@ from mpl_toolkits.mplot3d import Axes3D  # Import para gráfico 3D
 # Parámetros del problema
 # ========================================
 R = 0.6 # [m]
-alpha = 100 # [N/m²]
+alpha = 0.01 # [N/m²]
 beta = 50 # [1/m²]
 gamma = 0.3 
 theta = np.pi / 4  # dirección del máximo cargue (arriba) [rad]
@@ -235,7 +235,7 @@ u_max_values = []
 rng = np.random.default_rng(42)
 
 R_vals     = rng.normal(0.6, 0.02,  N)     # [m]
-alpha_vals = rng.normal(100, 10,    N)     # [N/m²]
+alpha_vals = rng.normal(0.01, 0.001,    N)     # [N/m²]
 beta_vals  = rng.normal(50,  5,     N)     # [1/m²]
 gamma_vals = rng.normal(0.3, 0.05,  N)     # adimensional
 theta_vals = rng.normal(np.pi/4, np.pi/12, N)    # [rad]
@@ -297,7 +297,7 @@ plt.tight_layout()
 plt.show()
 
 # ========================================
-# 10. Análisis de correlación entre parámetros y deformación máxima
+# 8. Análisis de correlación entre parámetros y deformación máxima
 # ========================================
 
 # Crear DataFrame con parámetros y resultados
@@ -330,7 +330,7 @@ plt.tight_layout()
 plt.show()
 
 # ========================================
-# 12. Estudio Paramétrico para todos los parámetros (α, β, γ, R, θ)
+# 9. Estudio Paramétrico para todos los parámetros (α, β, γ, R, θ)
 # ========================================
 
 def estudio_parametrico(nombre_param, valores, R_mean=0.6, alpha_mean=100, beta_mean=50, gamma_mean=0.3, theta_mean=np.pi/4):
