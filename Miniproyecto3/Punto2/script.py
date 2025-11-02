@@ -238,7 +238,7 @@ R_vals     = rng.normal(0.6, 0.02,  N)     # [m]
 alpha_vals = rng.normal(100, 10,    N)     # [N/m²]
 beta_vals  = rng.normal(50,  5,     N)     # [1/m²]
 gamma_vals = rng.normal(0.3, 0.05,  N)     # adimensional
-theta_vals = rng.uniform(0, 2*np.pi, N)    # [rad]
+theta_vals = rng.normal(np.pi/4, np.pi/12, N)    # [rad]
 
 def assemble_load(vertices, elements, R, alpha, beta, gamma, theta):
     F = np.zeros(len(vertices))
@@ -330,60 +330,87 @@ plt.tight_layout()
 plt.show()
 
 # ========================================
-# 11. Estudio Paramétrico (variando α, el parámetro más influyente)
+# 12. Estudio Paramétrico para todos los parámetros (α, β, γ, R, θ)
 # ========================================
 
-# Fijar parámetros medios
-R_mean = 0.6     # [m]
-beta_mean = 50   # [1/m²]
-gamma_mean = 0.3
-theta_mean = np.pi / 4
+def estudio_parametrico(nombre_param, valores, R_mean=0.6, alpha_mean=100, beta_mean=50, gamma_mean=0.3, theta_mean=np.pi/4):
+    """Ejecuta el FEM variando un único parámetro y retorna los resultados."""
+    u_max_list = []
+    for i, val in enumerate(valores):
+        F = np.zeros(len(vertices))
+        for tri in elements:
+            coords = vertices[tri]
+            x, y = coords[:, 0], coords[:, 1]
+            A = 0.5 * np.linalg.det([[1, x[0], y[0]],
+                                     [1, x[1], y[1]],
+                                     [1, x[2], y[2]]])
+            if A <= 1e-8:
+                continue
+            A = abs(A)
+            xc, yc = np.mean(x), np.mean(y)
+            r = np.hypot(xc, yc)
+            phi = np.arctan2(yc, xc)
 
-# Generar 100 valores aleatorios de alpha en torno a su media
-N_param = 100
-rng = np.random.default_rng(123)
-alpha_samples = rng.normal(100, 10, N_param)
+            # Selección de parámetro variable
+            if nombre_param == "alpha":
+                f_val = val * (1 + beta_mean * r**2 + gamma_mean * np.cos(phi - theta_mean))
+            elif nombre_param == "beta":
+                f_val = alpha_mean * (1 + val * r**2 + gamma_mean * np.cos(phi - theta_mean))
+            elif nombre_param == "gamma":
+                f_val = alpha_mean * (1 + beta_mean * r**2 + val * np.cos(phi - theta_mean))
+            elif nombre_param == "R":
+                f_val = alpha_mean * (1 + beta_mean * (r**2 / val) + gamma_mean * np.cos(phi - theta_mean))
+            elif nombre_param == "theta":
+                f_val = alpha_mean * (1 + beta_mean * r**2 + gamma_mean * np.cos(phi - val))
+            else:
+                raise ValueError("Parámetro no reconocido")
 
-# Resolver FEM para cada alpha
-u_alpha = []
+            Fe = np.full(3, f_val * A / 3)
+            for k in range(3):
+                F[tri[k]] += Fe[k]
+        F[bmask] = 0.0
 
-for i, a_i in enumerate(alpha_samples):
-    F = np.zeros(len(vertices))
-    for tri in elements:
-        coords = vertices[tri]
-        x, y = coords[:, 0], coords[:, 1]
-        A = 0.5 * np.linalg.det([[1, x[0], y[0]],
-                                 [1, x[1], y[1]],
-                                 [1, x[2], y[2]]])
-        if A <= 1e-8:
-            continue
-        A = abs(A)
-        xc, yc = np.mean(x), np.mean(y)
-        r = np.hypot(xc, yc)
-        phi = np.arctan2(yc, xc)
-        f_val = a_i * (1 + beta_mean * r**2 + gamma_mean * np.cos(phi - theta_mean))
-        Fe = np.full(3, f_val * A / 3)
-        for k in range(3):
-            F[tri[k]] += Fe[k]
-    F[bmask] = 0.0
-    try:
-        U_i = np.linalg.solve(Kbc, F)
-        u_alpha.append(np.max(U_i))
-    except np.linalg.LinAlgError:
-        u_alpha.append(np.nan)
+        try:
+            U_i = np.linalg.solve(Kbc, F)
+            u_max_list.append(np.max(U_i))
+        except np.linalg.LinAlgError:
+            u_max_list.append(np.nan)
 
-    print(f"Simulación α {i+1}/{N_param} completada")
+        print(f"Simulación {nombre_param} {i+1}/{len(valores)} completada")
+    return np.array(u_max_list)
 
-u_alpha = np.array(u_alpha)
+# --- Ejecutar estudios ---
+u_alpha = estudio_parametrico("alpha", alpha_vals)
+u_beta  = estudio_parametrico("beta",  beta_vals)
+u_gamma = estudio_parametrico("gamma", gamma_vals)
+u_R     = estudio_parametrico("R",     R_vals)
+u_theta = estudio_parametrico("theta", theta_vals)
 
-# --- Graficar relación funcional α vs u_max ---
-plt.figure(figsize=(7,5))
-plt.scatter(alpha_samples, u_alpha, color="teal", s=40, alpha=0.8, label="Simulaciones FEM")
-sns.regplot(x=alpha_samples, y=u_alpha, scatter=False, color="red", label="Tendencia lineal")
-plt.title("Relación funcional entre α y deformación máxima $u_{max}$")
-plt.xlabel("α  [N/m²]")
-plt.ylabel("Deformación máxima $u_{max}$ [m]")
-plt.legend()
-plt.grid(True, linestyle="--", alpha=0.6)
-plt.tight_layout()
+# --- Graficar resultados comparativos ---
+parametros = {
+    "alpha": (alpha_vals, u_alpha, "α [N/m²]", True),
+    "beta":  (beta_vals,  u_beta,  "β [1/m²]", True),
+    "gamma": (gamma_vals, u_gamma, "γ [-]", True),
+    "R":     (R_vals,     u_R,     "R [m]", True),
+    "theta": (theta_vals, u_theta, "θ [rad]", False)  # sin regresión lineal
+}
+
+fig, axs = plt.subplots(3, 2, figsize=(11, 12))
+axs = axs.flatten()
+
+for i, (param, (x, y, label, lineal)) in enumerate(parametros.items()):
+    sns.scatterplot(x=x, y=y, ax=axs[i], color="teal", s=40, alpha=0.7, edgecolor="k", linewidth=0.3)
+    if lineal:
+        sns.regplot(x=x, y=y, ax=axs[i], scatter=False, color="red", ci=None)
+    axs[i].set_title(f"{param} vs $u_{{max}}$")
+    axs[i].set_xlabel(label)
+    axs[i].set_ylabel("$u_{max}$ [m]")
+    axs[i].grid(True, linestyle="--", alpha=0.5)
+
+# Eliminar subplot vacío
+for j in range(len(parametros), len(axs)):
+    fig.delaxes(axs[j])
+
+plt.suptitle("Estudio Paramétrico Univariado – Influencia de cada parámetro en la deformación máxima", fontsize=13)
+plt.tight_layout(rect=[0, 0, 1, 0.97])
 plt.show()
