@@ -10,6 +10,7 @@ The code also uses the matplotlib library to plot the solution."""
 import numpy as np
 import matplotlib.pyplot as plt
 import scipy as sp
+from scipy.integrate import fixed_quad
 
 def generate_random_mesh(n, std_dev):
     """
